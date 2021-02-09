@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div>The visited URL is: {{ url }}</div>
+    <p>{{ message }}</p>
     <input type="text" v-model="message" />
     <button @click="onClick">click test</button>
   </div>
@@ -16,6 +17,7 @@ export default {
   },
   methods: {
     onClick() {
+      this.message += "click test";
       console.log(this.message, "click test");
     },
   },
