@@ -13,13 +13,13 @@ export default {
   data() {
     return {
       message: "hello vue ssr",
-    };
+    }
   },
   methods: {
     onClick() {
-      this.message += "click test";
-      console.log(this.message, "click test");
+      this.message += "click test"
+      console.log(this.message, "click test")
     },
   },
-};
+}
 </script>

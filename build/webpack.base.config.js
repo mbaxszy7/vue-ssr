@@ -1,9 +1,11 @@
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const path = require("path");
-const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
-const resolve = (file) => path.resolve(__dirname, file);
+/* eslint-disable import/no-extraneous-dependencies */
+const VueLoaderPlugin = require("vue-loader/lib/plugin")
+const path = require("path")
+const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin")
 
-const isProd = process.env.NODE_ENV === "production";
+const resolve = (file) => path.resolve(__dirname, file)
+
+const isProd = process.env.NODE_ENV === "production"
 
 module.exports = {
   mode: isProd ? "production" : "development",
@@ -45,4 +47,4 @@ module.exports = {
     ],
   },
   plugins: [new VueLoaderPlugin(), new FriendlyErrorsWebpackPlugin()],
-};
+}

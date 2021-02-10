@@ -1,7 +1,8 @@
-const { merge } = require("webpack-merge");
+/* eslint-disable import/no-extraneous-dependencies */
+const { merge } = require("webpack-merge")
 
-const baseConfig = require("./webpack.base.config.js");
-const VueSSRClientPlugin = require("vue-server-renderer/client-plugin");
+const VueSSRClientPlugin = require("vue-server-renderer/client-plugin")
+const baseConfig = require("./webpack.base.config.js")
 
 module.exports = merge(baseConfig, {
   entry: { app: "./src/entry-client.js" },
@@ -36,4 +37,4 @@ module.exports = merge(baseConfig, {
     // 此插件在输出目录中生成 `vue-ssr-client-manifest.json`。
     new VueSSRClientPlugin(),
   ],
-});
+})

@@ -1,8 +1,9 @@
-const { merge } = require("webpack-merge");
+/* eslint-disable import/no-extraneous-dependencies */
+const { merge } = require("webpack-merge")
 
-const nodeExternals = require("webpack-node-externals");
-const baseConfig = require("./webpack.base.config.js");
-const VueSSRServerPlugin = require("vue-server-renderer/server-plugin");
+const nodeExternals = require("webpack-node-externals")
+const VueSSRServerPlugin = require("vue-server-renderer/server-plugin")
+const baseConfig = require("./webpack.base.config.js")
 
 module.exports = merge(baseConfig, {
   // 将 entry 指向应用程序的 server entry 文件
@@ -28,4 +29,4 @@ module.exports = merge(baseConfig, {
     // 这是将服务器的整个输出构建为单个 JSON 文件的插件。 // 默认文件名为 `vue-ssr-server-bundle.json`
     new VueSSRServerPlugin(),
   ],
-});
+})
