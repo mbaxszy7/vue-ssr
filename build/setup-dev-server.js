@@ -3,8 +3,10 @@ const path = require("path")
 const chokidar = require("chokidar")
 const webpack = require("webpack")
 const webpackMiddleware = require("webpack-dev-middleware")
+const hotModuleReplace = require("webpack-hot-middleware")
 
 const webpackServerConfig = require("./webpack.server.config.js")
+const webpackClientConfig = require("./webpack.client.config.js")
 
 const resolve = (file) => path.resolve(__dirname, file)
 
@@ -49,6 +51,34 @@ module.exports = (server, callback) => {
   })
 
   // 监视构建clientManifest -> 调用update
+  webpackClientConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+  webpackClientConfig.entry.app = [
+    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true&reload=true`,
+    webpackClientConfig.entry.app,
+  ]
+  webpackClientConfig.output.filename = "[name].js"
+  const clientCompiler = webpack(webpackClientConfig)
+  const clientDevMiddle = webpackMiddleware(clientCompiler, {
+    publicPath: webpackClientConfig.output.publicPath,
+    logLevel: "silent",
+  })
+  clientCompiler.hooks.done.tap("server", () => {
+    clientManifest = JSON.parse(
+      clientDevMiddle.fileSystem.readFileSync(
+        resolve("../dist/vue-ssr-client-manifest.json"),
+        "utf-8",
+      ),
+    )
+    update()
+  })
+
+  server.use(
+    hotModuleReplace(clientCompiler, {
+      log: false,
+    }),
+  )
+  // 将clientDevMiddle挂载到express服务中，提供对其内部内存中数据的访问
+  server.use(clientDevMiddle)
 
   return onReady
 }

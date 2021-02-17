@@ -15,13 +15,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "chokidar": "^3.5.1",
     "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "vue": "^2.6.12",
+    "vue-meta": "^2.4.0",
+    "vue-router": "^3.5.1",
     "vue-server-renderer": "^2.6.12",
+    "vuex": "^3.6.2",
     "webpack": "^4.46.0",
-    "webpack-dev-middleware": "^3.7.0"
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
